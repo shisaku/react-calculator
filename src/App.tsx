@@ -6,47 +6,75 @@ import { useState } from "react";
 function App() {
   const [result, setResult] = useState("");
 
-  const onClickButton = (value: string) => {
+  const displayButtonValue = (value: string) => {
     setResult(result + value);
   };
   return (
     <table>
       <tr>
-        <td colSpan={3}>
+        <td colSpan={4}>
           <input type="text" value={result} id="resultScreen" readOnly />
         </td>
       </tr>
       <tr>
         <td>
-          <Button onClick={() => onClickButton("7")}>7</Button>
+          <Button onClick={() => displayButtonValue("7")}>7</Button>
         </td>
         <td>
-          <Button onClick={() => onClickButton("8")}>8</Button>
+          <Button onClick={() => displayButtonValue("8")}>8</Button>
         </td>
         <td>
-          <Button onClick={() => onClickButton("9")}>9</Button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <Button onClick={() => onClickButton("4")}>4</Button>
+          <Button onClick={() => displayButtonValue("9")}>9</Button>
         </td>
         <td>
-          <Button onClick={() => onClickButton("5")}>5</Button>
-        </td>
-        <td>
-          <Button onClick={() => onClickButton("6")}>6</Button>
+          <Button onClick={() => displayButtonValue("÷")}>÷</Button>
         </td>
       </tr>
       <tr>
         <td>
-          <Button onClick={() => onClickButton("1")}>1</Button>
+          <Button onClick={() => displayButtonValue("4")}>4</Button>
         </td>
         <td>
-          <Button onClick={() => onClickButton("2")}>2</Button>
+          <Button onClick={() => displayButtonValue("5")}>5</Button>
         </td>
         <td>
-          <Button onClick={() => onClickButton("3")}>3</Button>
+          <Button onClick={() => displayButtonValue("6")}>6</Button>
+        </td>
+        <td>
+          <Button onClick={() => displayButtonValue("×")}>×</Button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <Button onClick={() => displayButtonValue("1")}>1</Button>
+        </td>
+        <td>
+          <Button onClick={() => displayButtonValue("2")}>2</Button>
+        </td>
+        <td>
+          <Button onClick={() => displayButtonValue("3")}>3</Button>
+        </td>
+        <td>
+          <Button onClick={() => displayButtonValue("-")}>-</Button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <Button onClick={() => displayButtonValue("0")}>0</Button>
+        </td>
+        <td>
+          <Button onClick={() => displayButtonValue(".")}>.</Button>
+        </td>
+        <td>
+          <Button onClick={() => displayButtonValue("=")}>=</Button>
+        </td>
+        <td>
+          <Button onClick={() => displayButtonValue("+")}>+</Button>
+        </td>
+      </tr>
+      <tr>
+        <td colSpan={4}>
+          <Button onClick={() => displayButtonValue("+")}>AC</Button>
         </td>
       </tr>
     </table>
