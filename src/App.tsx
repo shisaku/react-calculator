@@ -9,6 +9,10 @@ function App() {
   const displayButtonValue = (value: string) => {
     setResult(result + value);
   };
+
+  const resetResult = () => {
+    setResult("");
+  };
   return (
     <table>
       <tr>
@@ -74,7 +78,7 @@ function App() {
       </tr>
       <tr>
         <td colSpan={4}>
-          <Button onClick={() => displayButtonValue("+")}>AC</Button>
+          <Button onClick={() => resetResult()}>AC</Button>
         </td>
       </tr>
     </table>
