@@ -3,10 +3,21 @@ import "./App.css";
 import { Button } from "./components/Button";
 import { useState } from "react";
 
+const symbols = ["+", "-", "×", "÷", "."];
 function App() {
   const [result, setResult] = useState("");
 
   const displayButtonValue = (value: string) => {
+    const isSymbol = symbols.includes(value);
+    const lastChar = result.slice(-1);
+    const hasSymbol = symbols.includes(lastChar);
+    // 記号が2つ続いたとき、最後の記号を新しい記号に置き換える処理
+    if (isSymbol && hasSymbol) {
+      const strLength = result.length;
+      const changeLastChar = result.substring(0, strLength - 1) + value;
+      setResult(changeLastChar);
+      return;
+    }
     setResult(result + value);
   };
 
