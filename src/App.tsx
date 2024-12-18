@@ -7,20 +7,30 @@ const symbols = ["+", "-", "×", "÷", "."];
 function App() {
   const [result, setResult] = useState("");
 
+  //クリックしたボタンを画面に表示する処理
   const displayButtonValue = (value: string) => {
     const isSymbol = symbols.includes(value);
+    const isFirstCharacter = result.length === 0;
     const lastChar = result.slice(-1);
     const hasSymbol = symbols.includes(lastChar);
+
+    // 一文字目が記号の時、入力不可
+    if (isSymbol && isFirstCharacter) {
+      setResult("");
+      return;
+    }
     // 記号が2つ続いたとき、最後の記号を新しい記号に置き換える処理
     if (isSymbol && hasSymbol) {
       const strLength = result.length;
       const changeLastChar = result.substring(0, strLength - 1) + value;
       setResult(changeLastChar);
       return;
+    } else {
+      setResult(result + value);
+      return;
     }
-    setResult(result + value);
   };
-
+  //画面を初期化する処理
   const resetResult = () => {
     setResult("");
   };
