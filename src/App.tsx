@@ -5,40 +5,49 @@ import { useState } from "react";
 
 const symbols = ["+", "-", "×", "÷", "."];
 function App() {
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState<string[]>([]);
 
   //クリックしたボタンを画面に表示する処理
   const displayButtonValue = (value: string) => {
     const isSymbol = symbols.includes(value);
-    const isFirstCharacter = result.length === 0;
-    const lastChar = result.slice(-1);
-    const hasSymbol = symbols.includes(lastChar);
+    const isFirstChar = result.length === 0;
+    const lastChar = result.at(-1) ?? "";
+    const hasSymbolLastChar = symbols.includes(lastChar);
 
-    // 一文字目が記号の時、入力不可
-    if (isSymbol && isFirstCharacter) {
-      setResult("");
+    // 一文字目が記号の時、表示しないようにする処理
+    if (isFirstChar && isSymbol) {
+      setResult([]);
       return;
     }
     // 記号が2つ続いたとき、最後の記号を新しい記号に置き換える処理
-    if (isSymbol && hasSymbol) {
-      const strLength = result.length;
-      const changeLastChar = result.substring(0, strLength - 1) + value;
-      setResult(changeLastChar);
-      return;
-    } else {
-      setResult(result + value);
+    if (isSymbol && hasSymbolLastChar) {
+      const replaceResult = [...result];
+      replaceResult[replaceResult.length - 1] = value;
+      setResult(replaceResult);
       return;
     }
+    // 計算結果を出力
+    const newArray = [...result, value];
+    setResult(newArray);
+    return;
   };
   //画面を初期化する処理
   const resetResult = () => {
-    setResult("");
+    setResult([]);
   };
+
+  //画面に表示されている計算式を計算する処理
+  const calcrateDisplay = () => {};
   return (
     <table>
       <tr>
         <td colSpan={4}>
-          <input type="text" value={result} id="resultScreen" readOnly />
+          <input
+            type="text"
+            value={result.join("")}
+            id="resultScreen"
+            readOnly
+          />
         </td>
       </tr>
       <tr>
